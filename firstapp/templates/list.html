@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>All Todos</h1>
+<ul>
+    {% if todos %}
+        {% for todo in todos %}
+        <li><a href="/todo/update/{{ todo.id }}">{{ todo.name }}</a></li>
+        {% endfor %}
+    {% else %}
+        <li>You have nothing!</li>
+        {% if not user.is_authenticated %}
+            <li>Please login to view your items.</li>
+        {% endif %}
+    {% endif %}
+</ul>
+{% endblock content %}
