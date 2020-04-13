@@ -3,9 +3,9 @@
 {% block content %}
 <h1>All Todos</h1>
 <ul>
-    {% if todos %}
-        {% for todo in todos %}
-        <li><a href="/todo/update/{{ todo.id }}">{{ todo.name }}</a></li>
+    {% if instance %}
+        {% for todo in instance %}
+            <li><a href="/todo/{{ todo.id }}">{{ todo.name }}</a></li>
         {% endfor %}
     {% else %}
         <li>You have nothing!</li>

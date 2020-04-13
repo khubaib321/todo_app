@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{% if instance %}Update{% else %}Create{% endif %} Todo</h1>
 
-<form action="/todo/{% if instance %}update/{{ instance.id }}/{% else %}create/{% endif %}" method="POST">
+<form method="POST">
     {% csrf_token %}
     <table style="text-align: left;">
         {{ form.as_table }}

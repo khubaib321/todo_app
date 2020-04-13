@@ -2,6 +2,7 @@
 
 from uuid import uuid4
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 
@@ -21,7 +22,8 @@ class Todo(models.Model):
         return self.name
 
     def set_assigned_user(self, request):
-        """Assign currently logged in user to model object
+        """Method obsolete after using Class based views.
+        Assign currently logged in user to model object.
 
         :param request: (HttpRequest) Http request object
         """
@@ -32,3 +34,12 @@ class Todo(models.Model):
             return
 
         self.assigned_user = request_user
+
+    def get_absolute_url(self):
+        """Overriding ModelBase.get_absolute_url
+        Get absolute url for a record of this model
+
+        :return: (str) absolute url to a model record
+        """
+
+        return reverse('todo-detail', kwargs={'pk': self.id})

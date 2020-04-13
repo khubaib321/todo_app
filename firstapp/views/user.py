@@ -1,17 +1,15 @@
-from django.shortcuts import redirect
-from django.contrib import messages
-from django.contrib.auth import logout
+"""User login/logout class based views"""
+
+from django.contrib.auth.views import LoginView, LogoutView
 
 
-def log_out(request):
-    """Handles user log out requests"""
+class UserLoginView(LoginView):
+    """User login view class"""
 
-    try:
-        logout(request)
-        messages.success(request, 'Log out successful.')
+    template_name = 'login.html'
 
-    except Exception as exception:
-        messages.error(request, str(exception))
 
-    finally:
-        return redirect('home')
+class UserLogoutView(LogoutView):
+    """User login view class"""
+
+    template_name = 'list.html'

@@ -17,9 +17,14 @@ class TodoForm(forms.ModelForm):
         model = Todo
         fields = ['name', 'reminder', 'short_desc', 'assigned_user']
 
-    def __init__(self, data=None, request=None, **kwargs):
+    def __init__(self, data=None, **kwargs):
+        """Removes assigned user field for non superusers.
+
+        :param data: (dict), data dictionary defaults to None
+        """
+
+        user = kwargs.pop('user', None)
         super().__init__(data=data, **kwargs)
 
-        # Hide assigned user field for non superusers
-        if request and not request.user.is_superuser:
-            self.fields['assigned_user'].widget = self.fields['assigned_user'].hidden_widget()
+        if user and user.is_superuser is False:
+            self.fields.pop('assigned_user', None)

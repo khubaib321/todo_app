@@ -1,3 +1,5 @@
+"""Todo app views. Obsolete now since using Class based views in todo_cls.py"""
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError

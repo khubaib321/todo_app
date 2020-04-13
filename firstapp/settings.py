@@ -128,4 +128,5 @@ INTERNAL_IPS = [
     # ...
 ]
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'todo-list'
+LOGIN_URL = 'user-login'
