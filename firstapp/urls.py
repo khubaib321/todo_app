@@ -20,15 +20,30 @@ from firstapp.views.user import UserLoginView, UserLogoutView
 from firstapp.views.todo_cls import (TodoListView, TodoDetailView,
                                      TodoCreateView, TodoUpdateView,
                                      TodoDeleteView)
+from api import views
+from django.conf.urls import url
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'todos', views.TodoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('debug/', include(debug_toolbar.urls)),
-    path('todo/list/', TodoListView.as_view(), name='todo-list'),
+
+    # VIEW BASED ROUTES
+    path('todo/show/', TodoListView.as_view(), name='todo-show'),
     path('todo/create/', TodoCreateView.as_view(), name='todo-create'),
-    path('todo/<str:pk>/', TodoDetailView.as_view(), name='todo-detail'),
+    path('todo/detail/<str:pk>/', TodoDetailView.as_view(), name='todo-detail'),
     path('todo/update/<str:pk>/', TodoUpdateView.as_view(), name='todo-update'),
     path('todo/delete/<str:pk>/', TodoDeleteView.as_view(), name='todo-delete'),
     path('login/', UserLoginView.as_view(), name='user-login'),
     path('logout/', UserLogoutView.as_view(), name='user-logout'),
+
+    # DRF API BASED ROUTES
+    # Wire up our API using automatic URL routing.
+    # Additionally, we include login URLs for the browsable API.
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

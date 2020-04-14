@@ -12,9 +12,9 @@ class Todo(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=32)
     reminder = models.BooleanField(default=False)
-    short_desc = models.CharField(max_length=255)
+    short_desc = models.CharField(max_length=255, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    assigned_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    assigned_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True)
 
     def __str__(self):
         """Get str value for class objects"""

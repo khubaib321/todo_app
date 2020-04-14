@@ -94,5 +94,5 @@ class TodoUpdateView(AccessControlMixin, TodoCreateView, UpdateView):
 class TodoDeleteView(AccessControlMixin, TodoBaseView, DeleteView):
     """Todo delete view class"""
 
-    success_url = '/todo/list/'
+    success_url = '/todo/show/'
     template_name = 'delete.html'

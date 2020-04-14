@@ -5,7 +5,7 @@
 <ul>
     {% if instance %}
         {% for todo in instance %}
-            <li><a href="/todo/{{ todo.id }}">{{ todo.name }}</a></li>
+            <li><a href="/todo/detail/{{ todo.id }}">{{ todo.name }}</a></li>
         {% endfor %}
     {% else %}
         <li>You have nothing!</li>

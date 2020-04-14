@@ -1,2 +1,5 @@
 django
 django-debug-toolbar
+djangorestframework
+markdown
+django-filter

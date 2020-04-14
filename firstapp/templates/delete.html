@@ -5,7 +5,7 @@
 <form method="POST">
     {% csrf_token %}
     <input type="submit" value="Yes">
-    <button onclick="location.pathname='/todo/{{ instance.id }}/'; return false;">No</button>
+    <button onclick="location.pathname='/todo/detail/{{ instance.id }}/'; return false;">No</button>
 </form>
 
 {% endblock content %}
