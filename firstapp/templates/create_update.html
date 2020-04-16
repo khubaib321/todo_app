@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{% if instance %}Update{% else %}Create{% endif %} Todo</h1>
+<h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} Todo</h1>
 
 <form method="POST">
     {% csrf_token %}
     <table style="text-align: left;">
         {{ form.as_table }}
     </table>
-    {% if not instance %}
+    {% if not form.instance.pk %}
         <input type="submit" value="Create">
     {% else %}
         <input type="submit" value="Update">
-        <button onclick="location.pathname='/todo/delete/{{ instance.id }}/'; return false;">Delete</button>
+        <button onclick="location.pathname='/todo/delete/{{ form.instance.pk }}/'; return false;">Delete</button>
     {% endif %}
 </form>
 {% endblock content %}

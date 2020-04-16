@@ -43,7 +43,7 @@ class TodoSerializer(serializers.ModelSerializer):
 
         request_user = self._get_request_user()
         representation = super(TodoSerializer, self).to_representation(instance)
-        if not getattr(request_user, 'is_superuser'):
+        if request_user and not request_user.is_superuser:
             representation.pop('assigned_user')
 
         return representation
@@ -57,7 +57,7 @@ class TodoSerializer(serializers.ModelSerializer):
         """
 
         request_user = self._get_request_user()
-        if not getattr(request_user, 'is_superuser'):
+        if request_user and not request_user.is_superuser:
             kwargs['assigned_user'] = request_user
 
         return super(TodoSerializer, self).save(**kwargs)

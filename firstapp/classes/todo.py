@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Todo(models.Model):
     """Todo model"""
 
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    id = models.AutoField(primary_key=True, auto_created=True, serialize=False)
     name = models.CharField(max_length=32)
     reminder = models.BooleanField(default=False)
     short_desc = models.CharField(max_length=255, null=True, blank=True)
@@ -21,15 +21,14 @@ class Todo(models.Model):
 
         return self.name
 
-    def set_assigned_user(self, request):
+    def set_assigned_user(self, request_user):
         """Method obsolete after using Class based views.
         Assign currently logged in user to model object.
 
-        :param request: (HttpRequest) Http request object
+        :param request_user: (User) user model
         """
 
-        request_user = getattr(request, 'user', None)
-        if (request_user and request_user.is_superuser) or not request_user.is_authenticated:
+        if getattr(request_user, 'is_superuser'):
             # Do not force assignment if superuser, let them assign to anyone
             return
 
@@ -42,4 +41,4 @@ class Todo(models.Model):
         :return: (str) absolute url to a model record
         """
 
-        return reverse('todo-detail', kwargs={'pk': self.id})
+        return reverse('todo-detail', kwargs={'pk': self.pk})

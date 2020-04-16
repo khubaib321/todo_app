@@ -8,8 +8,8 @@
     {% if user.is_superuser %}
         <p><b>Task assigned to: </b>{{ instance.assigned_user }}</p>
     {% endif %}
-    <button onclick="location.pathname='/todo/update/{{ instance.id }}/'">Update</button>
-    <button onclick="location.pathname='/todo/delete/{{ instance.id }}/'">Delete</button>
+    <button onclick="location.pathname='/todo/update/{{ instance.pk }}/'">Update</button>
+    <button onclick="location.pathname='/todo/delete/{{ instance.pk }}/'">Delete</button>
 </div>
 
 {% endblock content %}

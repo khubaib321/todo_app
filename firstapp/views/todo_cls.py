@@ -45,7 +45,7 @@ class TodoListView(TodoBaseView, ListView):
         query_set = super().get_queryset()
         if not self.request.user.is_superuser:
             return query_set.filter(assigned_user=self.request.user).values(
-                'id', 'name')
+                'pk', 'name')
 
         return query_set
 

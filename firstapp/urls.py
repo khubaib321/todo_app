@@ -35,9 +35,9 @@ urlpatterns = [
     # VIEW BASED ROUTES
     path('todo/show/', TodoListView.as_view(), name='todo-show'),
     path('todo/create/', TodoCreateView.as_view(), name='todo-create'),
-    path('todo/detail/<str:pk>/', TodoDetailView.as_view(), name='todo-detail'),
-    path('todo/update/<str:pk>/', TodoUpdateView.as_view(), name='todo-update'),
-    path('todo/delete/<str:pk>/', TodoDeleteView.as_view(), name='todo-delete'),
+    path('todo/detail/<int:pk>/', TodoDetailView.as_view(), name='todo-detail'),
+    path('todo/update/<int:pk>/', TodoUpdateView.as_view(), name='todo-update'),
+    path('todo/delete/<int:pk>/', TodoDeleteView.as_view(), name='todo-delete'),
     path('login/', UserLoginView.as_view(), name='user-login'),
     path('logout/', UserLogoutView.as_view(), name='user-logout'),
 

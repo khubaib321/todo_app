@@ -34,35 +34,30 @@ def create(request):
     try:
         _validate_permissions(request)
         if request.method == 'POST':
-            todo_form = TodoForm(request.POST)
+            todo_form = TodoForm(request.POST, user=request.user)
 
             if not todo_form.is_valid():
                 raise ValidationError('Invalid form data.')
 
-            todo_form.save(commit=False)
-            todo_form.instance.set_assigned_user(request)
             todo_form.save()
             messages.success(request, 'Todo created.')
 
     except PermissionError as exception:
         messages.error(request, str(exception))
-        return redirect('home')
+        return redirect('todo-show')
 
     except Exception as exception:
         messages.error(request, str(exception))
 
-    context['form'] = TodoForm(request=request)
+    context['form'] = TodoForm(user=request.user)
     return render(request, 'create_update.html', context=context)
 
 
 def update(request, id):
     """Handle form update requests"""
 
-    # TODO: Revert primary key to django default if possible then
-    # keep only form in context 
     context = {
-        'form': None,
-        'instance': None
+        'form': None
     }
 
     try:
@@ -70,26 +65,22 @@ def update(request, id):
         _validate_permissions(request, todo)
 
         if request.method == 'POST':
-            todo_form = TodoForm(request.POST, instance=todo)
+            todo_form = TodoForm(request.POST, instance=todo, user=request.user)
 
             if not todo_form.is_valid():
                 raise ValidationError('Invalid form data.')
 
-            # TODO: Revert primary key to django default if possible then
-            # use todo_form.save() to update model
-            todo.set_assigned_user(request)
-            todo.save()
+            todo_form.save()
             messages.success(request, 'Todo updated.')
 
     except PermissionError as exception:
         messages.error(request, str(exception))
-        return redirect('home')
+        return redirect('todo-show')
 
     except Exception as exception:
         messages.error(request, str(exception))
 
-    context['instance'] = todo
-    context['form'] = TodoForm(instance=todo, request=request)
+    context['form'] = TodoForm(instance=todo, user=request.user)
     return render(request, 'create_update.html', context=context)
 
 

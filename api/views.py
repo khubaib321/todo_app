@@ -38,3 +38,5 @@ class TodoViewSet(viewsets.ModelViewSet):
             return query_set.filter(assigned_user=self.request.user).all()
 
         return query_set
+
+# assigned_user -> method field
