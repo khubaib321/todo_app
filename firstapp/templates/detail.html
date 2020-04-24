@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h1>{{ instance.name }}</h1>
+    <p><b>Reminder: </b>{{ instance.reminder }}</p>
+    <p><b>Short description: </b>{{ instance.short_desc }}</p>
+    {% if user.is_superuser %}
+        <p><b>Task assigned to: </b>{{ instance.assigned_user }}</p>
+    {% endif %}
+    <button onclick="location.pathname='/todo/update/{{ instance.pk }}/'">Update</button>
+    <button onclick="location.pathname='/todo/delete/{{ instance.pk }}/'">Delete</button>
+</div>
+
+{% endblock content %}

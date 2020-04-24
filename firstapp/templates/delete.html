@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Delete {{ instance.name }}? This action is not reversible.</h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes">
+    <button onclick="location.pathname='/todo/detail/{{ instance.pk }}/'; return false;">No</button>
+</form>
+
+{% endblock content %}
